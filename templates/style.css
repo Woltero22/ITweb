@@ -1,0 +1,45 @@
+body {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: #bebee6; /* Pastelowe fioletowe tło */
+  }
+  
+  .container {
+    padding: 20px;
+    max-width: 500px;
+    width: 100%;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    background-color: #edb9db;
+    border-radius: 8px;
+    text-align: center; /* Centrum formularza */
+  }
+  
+  h1, p {
+    margin: 10px 0;
+    text-align: center; /* Centrum nagłówków i paragrafów */
+  }
+  
+  .button-group {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 20px;
+  }
+  
+  button {
+    padding: 10px 20px;
+    background-color: #5a8de0;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+  }
+  
+  button:hover {
+    background-color: #3b69b2;
+  }
+  

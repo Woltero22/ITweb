@@ -1,0 +1,253 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Cinzel&family=Lexend+Giga&family=PT+Sans:ital@1&display=swap" rel="stylesheet">
+  <title>Zuzanna Brom and Łukasz Łój</title>
+  <meta http-equiv="content-type" content="text/html; charset=UTF8">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="{{ url_for('static', filename='str_start.css') }}">
+</head>  
+
+<body>
+
+  <!-- Pasek nawigacyjny na samej górze -->
+  <div class="navigation-bar">
+    <div class="left-nav">
+      {% if request.path != url_for('str_start') %}
+        <a href="{{ url_for('str_start') }}">← Powrót do strony głównej</a>
+      {% endif %}
+    </div>
+    <div class="right-nav">
+      <p>Moje Konto</p>
+      <p>Status: Zalogowany/Zaloguj się</p>
+      <a href="{{ url_for('login') }}" class="login-register-btn">Zaloguj / Zarejestruj</a>
+    </div>
+  </div>
+
+  <h1> ZUZANNA BROM i ŁUKASZ ŁÓJ </h1>
+  
+  <div id="menu">
+      <ul id="navigation">
+        <li><a href="{{ url_for('equalizer') }}">Equalizer</a></li>
+        <li><a href="{{ url_for('analiza') }}">Blog</a></li>
+        <li><a href="{{ url_for('galeria') }}">Galeria</a></li>
+        <li><a href="{{ url_for('onas') }}">O nas</a></li>
+        <li><a href="{{ url_for('kontakt') }}">Kontakt</a></li>
+      </ul>
+  </div>
+
+  <div class="main-content">
+    <div class="intro-section">
+      <div class="banner-image">
+        <img src="{{ url_for('static', filename='img/lukaszomaranczarka.png') }}" alt="Zuzanna i Łukasz" />
+      </div>
+      <div class="intro-text">
+        <h2>Witamy na naszej stronie</h2>
+        <p>Odkryj świat muzyki, analizy dźwięków i inspiracji z Zuzanną Brom i Łukaszem Łójem. Nasza strona jest miejscem, gdzie sztuka spotyka technologię, a dźwięki ożywają na nowo. Zapraszamy do eksploracji i zanurzenia się w naszych projektach.</p>
+        <a href="{{ url_for('onas') }}" class="button">Dowiedz się więcej o nas</a>
+      </div>
+    </div>
+  </div>
+
+  <style>
+    /* Profesjonalny, estetyczny styl */
+    body {
+      font-family: 'Cinzel', serif;
+      background-color: #EFEAE1;
+      background-repeat: no-repeat;
+      background-position: center;
+      background-attachment: fixed;
+      margin: 0;
+      padding: 0;
+      color: #4E342E;
+      overflow-x: hidden; /* Usunięcie przewijania poziomego */
+    }
+
+    /* Nagłówek */
+    h1 {
+      text-align: center;
+      font-size: 42px;
+      font-weight: bold;
+      margin-top: 30px;
+      margin-bottom: 20px;
+      color: #3E2723;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+
+    /* Pasek nawigacyjny na górze */
+    .navigation-bar {
+      width: 100%;
+      max-width: 1600px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px 20px;
+      background-color: #fff;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      margin-bottom: 20px;
+      box-sizing: border-box;
+    }
+
+    .left-nav a {
+      color: #2f2f2f;
+      font-size: 1rem;
+      font-weight: bold;
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+
+    .left-nav a:hover {
+      color: #444;
+    }
+
+    .right-nav {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      margin-right: 10px;
+    }
+
+    .right-nav p {
+      margin: 0;
+      font-size: 1rem;
+      color: #2f2f2f;
+    }
+    /* Pasek nawigacyjny główny */
+    #menu {
+      width: 70%;
+      margin: 0 auto;
+      border-top: 2px solid #5D4037;
+      border-bottom: 2px solid #5D4037;
+      text-align: center;
+      padding: 15px 25px 10px 20px;
+      background-color: #F5F5F5;
+    }
+
+    ul {
+      list-style-type: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    li {
+      display: inline;
+      margin-right: 15px;
+    }
+
+    a {
+      color: #3E2723;
+      text-transform: uppercase;
+      text-decoration: none;
+      font-size: 18px;
+      padding: 5px 10px;
+      transition: background-color 0.3s ease, color 0.3s ease;
+    }
+
+    a:hover {
+      color: #ffffff;
+      background-color: #5D4037;
+      border-radius: 4px;
+    }
+
+    /* Styl dla głównej sekcji */
+    .main-content {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 50px 20px;
+    }
+
+    /* Sekcja wprowadzająca z obrazkiem i tekstem */
+    .intro-section {
+      display: flex;
+      align-items: center;
+      max-width: 900px;
+      gap: 30px;
+    }
+
+    /* Styl dla obrazka */
+    .banner-image img {
+      width: 250px;
+      border-radius: 15px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    /* Styl dla tekstu wprowadzającego */
+    .intro-text {
+      max-width: 600px;
+    }
+
+    .intro-text h2 {
+      font-size: 32px;
+      color: #3E2723;
+      margin-bottom: 15px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .intro-text p {
+      font-size: 18px;
+      line-height: 1.6;
+      color: #4E342E;
+      margin-bottom: 20px;
+    }
+
+    .button {
+      padding: 10px 20px;
+      background-color: #5D4037;
+      color: #ffffff;
+      border: none;
+      border-radius: 5px;
+      font-size: 18px;
+      text-decoration: none;
+      font-weight: bold;
+      transition: background-color 0.3s ease;
+    }
+
+    .button:hover {
+      background-color: #3E2723;
+    }
+    
+    /* Responsywność dla mniejszych ekranów */
+    @media (max-width: 768px) {
+      .intro-section {
+        flex-direction: column;
+        text-align: center;
+      }
+      
+      .banner-image img {
+        width: 200px;
+      }
+    }
+
+    /* Przycisk Zaloguj / Zarejestruj */
+.login-register-btn {
+  display: inline-block;
+  padding: 10px 20px;
+  margin-top: 10px;
+  background-color: #5D4037; /* Ciemniejszy kolor tła */
+  color: #fff;
+  text-transform: uppercase;
+  font-weight: bold;
+  font-size: 14px;
+  border: none;
+  border-radius: 5px;
+  text-decoration: none;
+  text-align: center;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.login-register-btn:hover {
+  background-color: #3E2723; /* Jeszcze ciemniejszy kolor przy hoverze */
+  transform: scale(1.05); /* Powiększenie przy najechaniu */
+}
+
+.login-register-btn:active {
+  background-color: #2C1A18; /* Kolor po kliknięciu */
+  transform: scale(0.95); /* Zmniejszenie przy kliknięciu */
+}
+  </style>
+</body>
+</html>

@@ -1,0 +1,144 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Welcome</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='str_start.css') }}">
+  </head>
+  <body>
+    
+    <!-- Pasek nawigacyjny -->
+    <div id="menu">
+        <ul id="navigation">
+          <li><a href="{{ url_for('equalizer') }}">Equalizer</a></li>
+          <li><a href="{{ url_for('analiza') }}">Blog</a></li>
+          <li><a href="{{ url_for('galeria') }}">Galeria</a></li>
+          <li><a href="{{ url_for('onas') }}">O nas</a></li>
+          <li><a href="{{ url_for('kontakt') }}">Kontakt</a></li>
+        </ul>
+    </div>
+    
+    <!-- Główna zawartość strony -->
+    <div class="container">
+      <h1>Welcome to the Student Portal</h1>
+      <p>Select an option to proceed:</p>
+      <div class="nav-buttons">
+        <a href="{{ url_for('login') }}" class="button">Login</a>
+        <a href="{{ url_for('register') }}" class="button">Register</a>
+        <a href="{{ url_for('str_start') }}" class="button">Start Page</a>
+        <a href="{{ url_for('equalizer') }}" class="button">Equalizer</a>
+      </div>
+    </div>
+    
+  </body>
+
+  <style>
+    /* Styl dla paska nawigacyjnego */
+    #menu {
+      width: 100%;
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: 1000;
+      border-top: 2px solid #5D4037;
+      border-bottom: 2px solid #5D4037;
+      text-align: center;
+      padding: 15px 0;
+      background-color: #F5F5F5;
+    }
+
+    ul {
+      list-style-type: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    li {
+      display: inline;
+      margin-right: 15px;
+    }
+
+    a {
+      color: #3E2723;
+      text-transform: uppercase;
+      text-decoration: none;
+      font-size: 18px;
+      padding: 5px 10px;
+      transition: background-color 0.3s ease, color 0.3s ease;
+    }
+
+    a:hover {
+      color: #ffffff;
+      background-color: #5D4037;
+      border-radius: 4px;
+    }
+
+    /* Główne ustawienia tła i kontenera */
+    body {
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      background-color: #f2f2f9;
+      font-family: 'Arial', sans-serif;
+    }
+    
+    .container {
+      padding: 30px;
+      max-width: 450px;
+      width: 90%;
+      background: #ffffff;
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+      border-radius: 15px;
+      text-align: center;
+      margin-top: 100px; /* Dodano odstęp na pasek nawigacyjny */
+    }
+    
+    /* Stylizacja nagłówków i paragrafów */
+    h1 {
+      font-size: 28px;
+      color: #4a4a76;
+      margin-bottom: 10px;
+    }
+    
+    p {
+      font-size: 16px;
+      color: #6a6a8a;
+      margin-bottom: 30px;
+    }
+
+    /* Przycisk nawigacyjny */
+    .nav-buttons {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+
+    .button {
+      padding: 12px 0;
+      background-color: #7a78e0;
+      color: #ffffff;
+      border: none;
+      border-radius: 8px;
+      font-size: 18px;
+      font-weight: bold;
+      text-decoration: none;
+      transition: background-color 0.3s ease;
+      display: inline-block;
+    }
+    
+    .button:hover {
+      background-color: #5a58c0;
+    }
+
+    /* Stylizacja przycisku dla lepszego efektu */
+    .button:active {
+      transform: scale(0.98);
+      background-color: #4a48a0;
+    }
+
+  </style>
+</html>

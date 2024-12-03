@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Cinzel&family=Lexend+Giga&family=PT+Sans:ital@1&display=swap" rel="stylesheet">
+  <title>Blog - Zuzanna Brom i Łukasz Łój</title>
+  <meta http-equiv="content-type" content="text/html; charset=UTF8">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+
+<body>
+
+  <!-- Pasek nawigacyjny na samej górze -->
+<div class="navigation-bar">
+  <div class="left-nav">
+    <a href="{{ url_for('str_start') }}">← Powrót do strony głównej</a>
+  </div>
+  <div class="right-nav">
+    <p>Moje Konto</p>
+    <p>Status: Zalogowany/Zaloguj się</p>
+    <a href="{{ url_for('login') }}" class="login-register-btn">Zaloguj / Zarejestruj</a>
+  </div>
+</div>
+
+  <h1>Blog</h1>
+
+  <!-- Pasek nawigacyjny główny -->
+  <div id="menu">
+      <ul id="navigation">
+        <li><a href="{{ url_for('equalizer') }}">Equalizer</a></li>
+        <li><a href="{{ url_for('analiza') }}">Blog</a></li>
+        <li><a href="{{ url_for('galeria') }}">Galeria</a></li>
+        <li><a href="{{ url_for('onas') }}">O nas</a></li>
+        <li><a href="{{ url_for('kontakt') }}">Kontakt</a></li>
+      </ul>
+  </div>
+
+
+<!-- Sekcja główna strony blog -->
+<div class="main-content">
+  <div class="blog-container">
+    {% set dates = ["9.10.2024", "16.10.2024", "23.10.2024", "30.10.2024", "6.11.2024", "13.11.2024", "20.11.2024", "27.11.2024", "4.12.2024", "11.12.2024", "18.12.2024", "25.12.2024", "1.1.2025", "8.1.2025", "15.1.2025"] %}
+    {% set text = [
+      "9.10.2024 - We made a list of our milestones.",
+      "16.10.2024 - We set a localhost, and in frontend we made a simple start page, and in backend an ability to add songs and equalize them.",
+      "23.10.2024 - We improved start page and equalizer in backend, added index page, which was going to be an edit version to have access to all the pages, we just set (contact, start page, equalizer page, contact page).", 
+      "30.10.2024 - We improved all of the pages, and made them look good (we wanted to make style in css, but we decided, that in every page we are going to just add a style part).", 
+      "6.11.2024 - We added 2 new pages: login and register, we also made a possibility to create an account, so to do that, we had to create a database with user's login information, we also added gallery, contact and blog page.", 
+      "13.11.2024 - We made a navigation bar in every page, so that a potential client can go back to the starting page and see if they are logged in or not. We also made a folder with pictures, and we added them in some pages, and a lot of them in the gallery page. That was made to add some pictures of some achievements during making this project, and we have to figure out if we want to have them just for seeing, or if we want to give our clients a ability to add them to a shared space.",
+      "20.11.2024 - We added a posibility to add pictures in our page - gallery. We also made a contact page with our location.",
+      "27.11.2024 - Additional content for the blog entry on this date.",
+      "4.12.2024 - Additional content for the blog entry on this date.",
+      "11.12.2024 - Additional content for the blog entry on this date.",
+      "18.12.2024 - Additional content for the blog entry on this date.",
+      "25.12.2024 - Additional content for the blog entry on this date.",
+      "1.1.2025 - Additional content for the blog entry on this date.",
+      "8.1.2025 - Additional content for the blog entry on this date.",
+      "15.1.2025 - Additional content for the blog entry on this date."
+    ] %}
+    {% for i in range(15) %}
+      <div class="blog-entry">
+        <h2>Wpis nr {{ i + 1 }}</h2>
+        <p>{{ text[i] }}</p>
+        <div class="entry-image">
+          <img src="{{ url_for('static', filename='img/' ~ dates[i].replace('.', '_') ~ '.png') }}" alt="Zdjęcie z dnia {{ dates[i] }}">
+        </div>
+        <p class="entry-date">Data: {{ dates[i] }}</p>
+      </div>
+    {% endfor %}
+  </div>
+</div>
+
+
+  <style>
+    /* Profesjonalny, estetyczny styl */
+    body {
+      font-family: 'Cinzel', serif;
+      background-color: #EFEAE1;
+      margin: 0;
+      padding: 0;
+      color: #4E342E;
+      overflow-x: hidden;
+    }
+
+    /* Nagłówek */
+    h1 {
+      text-align: center;
+      font-size: 42px;
+      font-weight: bold;
+      margin-top: 30px;
+      color: #3E2723;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+
+     /* Pasek nawigacyjny na górze */
+     .navigation-bar {
+      width: 100%;
+      max-width: 1600px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px 20px;
+      background-color: #fff;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      margin-bottom: 20px;
+      box-sizing: border-box;
+    }
+
+    .left-nav a {
+      color: #2f2f2f;
+      font-size: 1rem;
+      font-weight: bold;
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+
+    .left-nav a:hover {
+      color: #444;
+    }
+
+    .right-nav {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      margin-right: 10px;
+    }
+
+    .right-nav p {
+      margin: 0;
+      font-size: 1rem;
+      color: #2f2f2f;
+    }
+
+    /* Pasek nawigacyjny główny */
+    #menu {
+      width: 70%;
+      margin: 0 auto;
+      border-top: 2px solid #5D4037;
+      border-bottom: 2px solid #5D4037;
+      text-align: center;
+      padding: 15px;
+      background-color: #F5F5F5;
+    }
+
+    ul {
+      list-style-type: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    li {
+      display: inline;
+      margin-right: 15px;
+    }
+
+    a {
+      color: #3E2723;
+      text-transform: uppercase;
+      text-decoration: none;
+      font-size: 18px;
+      padding: 5px 10px;
+      transition: background-color 0.3s ease, color 0.3s ease;
+    }
+
+    a:hover {
+      color: #ffffff;
+      background-color: #5D4037;
+      border-radius: 4px;
+    }
+
+    /* Kontener bloga */
+    .blog-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 90%;
+      max-width: 800px;
+      margin: 0 auto;
+      padding-top: 30px;
+    }
+
+    .blog-entry {
+      background-color: #FFFFFF;
+      padding: 20px;
+      margin-bottom: 30px;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      text-align: left;
+      width: 100%;
+    }
+
+    .blog-entry h2 {
+      font-size: 24px;
+      color: #4E342E;
+      margin-bottom: 10px;
+    }
+
+    .blog-entry p {
+      font-size: 16px;
+      line-height: 1.6;
+      color: #5D4037;
+    }
+
+    .entry-image img {
+      display: block;
+      margin: 20px auto;
+      max-width: 100%;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+
+    .entry-date {
+      font-size: 14px;
+      color: #7B5E57;
+      text-align: right;
+      margin-top: 10px;
+    }
+    /* Przycisk Zaloguj / Zarejestruj */
+.login-register-btn {
+  display: inline-block;
+  padding: 10px 20px;
+  margin-top: 10px;
+  background-color: #5D4037; /* Ciemniejszy kolor tła */
+  color: #fff;
+  text-transform: uppercase;
+  font-weight: bold;
+  font-size: 14px;
+  border: none;
+  border-radius: 5px;
+  text-decoration: none;
+  text-align: center;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.login-register-btn:hover {
+  background-color: #3E2723; /* Jeszcze ciemniejszy kolor przy hoverze */
+  transform: scale(1.05); /* Powiększenie przy najechaniu */
+}
+
+.login-register-btn:active {
+  background-color: #2C1A18; /* Kolor po kliknięciu */
+  transform: scale(0.95); /* Zmniejszenie przy kliknięciu */
+}
+
+/* Przycisk Zaloguj / Zarejestruj */
+.login-register-btn {
+  display: inline-block;
+  padding: 10px 20px;
+  margin-top: 10px;
+  background-color: #5D4037; /* Ciemniejszy kolor tła */
+  color: #fff;
+  text-transform: uppercase;
+  font-weight: bold;
+  font-size: 14px;
+  border: none;
+  border-radius: 5px;
+  text-decoration: none;
+  text-align: center;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.login-register-btn:hover {
+  background-color: #3E2723; /* Jeszcze ciemniejszy kolor przy hoverze */
+  transform: scale(1.05); /* Powiększenie przy najechaniu */
+}
+
+.login-register-btn:active {
+  background-color: #2C1A18; /* Kolor po kliknięciu */
+  transform: scale(0.95); /* Zmniejszenie przy kliknięciu */
+}
+  </style>
+</body>
+</html>

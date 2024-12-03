@@ -1,0 +1,310 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Cinzel&family=Lexend+Giga&family=PT+Sans:ital@1&display=swap" rel="stylesheet">
+  <title>Kontakt - Zuzanna Brom i Łukasz Łój</title>
+  <meta http-equiv="content-type" content="text/html; charset=UTF8">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>  
+
+<body>
+
+  <!-- Pasek nawigacyjny na samej górze -->
+  <div class="navigation-bar">
+    <div class="left-nav">
+      <a href="{{ url_for('str_start') }}">← Powrót do strony głównej</a>
+    </div>
+    <div class="right-nav">
+      <p>Moje Konto</p>
+      <p>Status: Zalogowany/Zaloguj się</p>
+      <a href="{{ url_for('login') }}" class="login-register-btn">Zaloguj / Zarejestruj</a>
+    </div>
+  </div>
+
+  <h1>Kontakt</h1>
+
+  <!-- Pasek nawigacyjny główny -->
+  <div id="menu">
+      <ul id="navigation">
+        <li><a href="{{ url_for('equalizer') }}">Equalizer</a></li>
+        <li><a href="{{ url_for('analiza') }}">Blog</a></li>
+        <li><a href="{{ url_for('galeria') }}">Galeria</a></li>
+        <li><a href="{{ url_for('onas') }}">O nas</a></li>
+        <li><a href="{{ url_for('kontakt') }}">Kontakt</a></li>
+      </ul>
+  </div>
+
+  <!-- Sekcja główna strony kontaktowej -->
+  <div class="main-content">
+    <div class="contact-info">
+      <h2>Skontaktuj się z nami</h2>
+      <p>Masz pytania? Skontaktuj się z nami za pomocą poniższych danych lub wypełnij formularz kontaktowy.</p>
+
+      <div class="info-section">
+        <div class="info-item">
+          <h3>Adres</h3>
+          <p>ul. Przykladowa 123<br>00-000 Miasto, Polska</p>
+        </div>
+        <div class="info-item">
+          <h3>Telefon</h3>
+          <p>+48 123 456 789</p>
+        </div>
+        <div class="info-item">
+          <h3>Email</h3>
+          <p><a href="mailto:kontakt@przyklad.com">kontakt@przyklad.com</a></p>
+        </div>
+      </div>
+    </div>
+
+ <!-- Formularz kontaktowy -->
+ <div class="contact-form">
+  <form action="/send_email" method="POST">
+    <label for="name">Imię i nazwisko</label>
+    <input type="text" id="name" name="name" required>
+
+    <label for="email">Email</label>
+    <input type="email" id="email" name="email" required>
+
+    <label for="message">Wiadomość</label>
+    <textarea id="message" name="message" rows="5" required></textarea>
+
+    <button type="submit">Wyślij wiadomość</button>
+  </form>
+</div>
+
+{% with messages = get_flashed_messages(with_categories=true) %}
+  {% if messages %}
+    <ul>
+      {% for category, message in messages %}
+        <li class="{{ category }}">{{ message }}</li>
+      {% endfor %}
+    </ul>
+  {% endif %}
+{% endwith %}
+
+    <!-- Mapa lokalizacji -->
+    <div class="location-map">
+      <h2>Nasza lokalizacja</h2>
+      <p>Znajdziesz nas tutaj:</p>
+      <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3151.835434509584!2d144.95373631590407!3d-37.81627944209785!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6ad65d43f7b0b1fb%3A0xbbf8aa3bfc4d9b47!2sFederation%20Square!5e0!3m2!1sen!2sus!4v1638765474023!5m2!1sen!2sus" width="100%" height="300" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+    </div>
+  </div>
+  <style>
+    /* Profesjonalny, estetyczny styl */
+    body {
+      font-family: 'Cinzel', serif;
+      background-color: #EFEAE1;
+      margin: 0;
+      padding: 0;
+      color: #4E342E;
+    }
+
+    /* Nagłówek */
+    h1 {
+      text-align: center;
+      font-size: 42px;
+      font-weight: bold;
+      margin-top: 30px;
+      margin-bottom: 20px;
+      color: #3E2723;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+
+    /* Pasek nawigacyjny na górze */
+    .navigation-bar {
+      width: 100%;
+      max-width: 1600px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px 20px;
+      background-color: #fff;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      margin-bottom: 20px;
+      box-sizing: border-box;
+    }
+
+    .left-nav a {
+      color: #2f2f2f;
+      font-size: 1rem;
+      font-weight: bold;
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+
+    .left-nav a:hover {
+      color: #444;
+    }
+
+    .right-nav {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      margin-right: 10px;
+    }
+
+    .right-nav p {
+      margin: 0;
+      font-size: 1rem;
+      color: #2f2f2f;
+    }
+
+    /* Pasek nawigacyjny główny */
+    #menu {
+      width: 70%;
+      margin: 0 auto;
+      border-top: 2px solid #5D4037;
+      border-bottom: 2px solid #5D4037;
+      text-align: center;
+      padding: 15px;
+      background-color: #F5F5F5;
+    }
+
+    ul {
+      list-style-type: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    li {
+      display: inline;
+      margin-right: 15px;
+    }
+
+    a {
+      color: #3E2723;
+      text-transform: uppercase;
+      text-decoration: none;
+      font-size: 18px;
+      padding: 5px 10px;
+      transition: background-color 0.3s ease, color 0.3s ease;
+    }
+
+    a:hover {
+      color: #ffffff;
+      background-color: #5D4037;
+      border-radius: 4px;
+    }
+
+    /* Główna zawartość strony kontaktowej */
+    .main-content {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 50px 20px;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .contact-info, .contact-form, .location-map {
+      margin-bottom: 30px;
+      text-align: center;
+      width: 100%;
+    }
+
+    .contact-info h2, .contact-form h2, .location-map h2 {
+      font-size: 28px;
+      color: #3E2723;
+      margin-bottom: 15px;
+    }
+
+    .info-section {
+      display: flex;
+      justify-content: space-around;
+      flex-wrap: wrap;
+    }
+
+    .info-item {
+      margin: 10px;
+      max-width: 200px;
+    }
+
+    .info-item h3 {
+      font-size: 20px;
+      color: #5D4037;
+      margin-bottom: 5px;
+    }
+
+    .info-item p {
+      font-size: 16px;
+      color: #4E342E;
+    }
+
+    /* Formularz kontaktowy */
+    .contact-form form {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+      width: 100%;
+      max-width: 500px;
+      margin: 0 auto;
+    }
+
+    .contact-form label {
+      font-size: 16px;
+      color: #3E2723;
+      text-align: left;
+    }
+
+    .contact-form input, .contact-form textarea {
+      padding: 10px;
+      border: 1px solid #A1887F;
+      border-radius: 5px;
+      font-size: 16px;
+      color: #4E342E;
+    }
+
+    .contact-form button {
+      padding: 10px;
+      background-color: #5D4037;
+      color: #ffffff;
+      border: none;
+      border-radius: 5px;
+      font-size: 18px;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    .contact-form button:hover {
+      background-color: #3E2723;
+    }
+
+    /* Sekcja mapy */
+    .location-map iframe {
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+
+    /* Przycisk Zaloguj / Zarejestruj */
+.login-register-btn {
+  display: inline-block;
+  padding: 10px 20px;
+  margin-top: 10px;
+  background-color: #5D4037; /* Ciemniejszy kolor tła */
+  color: #fff;
+  text-transform: uppercase;
+  font-weight: bold;
+  font-size: 14px;
+  border: none;
+  border-radius: 5px;
+  text-decoration: none;
+  text-align: center;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.login-register-btn:hover {
+  background-color: #3E2723; /* Jeszcze ciemniejszy kolor przy hoverze */
+  transform: scale(1.05); /* Powiększenie przy najechaniu */
+}
+
+.login-register-btn:active {
+  background-color: #2C1A18; /* Kolor po kliknięciu */
+  transform: scale(0.95); /* Zmniejszenie przy kliknięciu */
+}
+  </style>
+</body>
+</html> 
+
