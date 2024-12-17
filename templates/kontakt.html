@@ -13,14 +13,28 @@
   <!-- Pasek nawigacyjny na samej górze -->
   <div class="navigation-bar">
     <div class="left-nav">
-      <a href="{{ url_for('str_start') }}">← Powrót do strony głównej</a>
+        {% if request.path != url_for('str_start') %}
+            <a href="{{ url_for('str_start') }}">← Powrót do strony głównej</a>
+        {% endif %}
     </div>
     <div class="right-nav">
-      <p>Moje Konto</p>
-      <p>Status: Zalogowany/Zaloguj się</p>
-      <a href="{{ url_for('login') }}" class="login-register-btn">Zaloguj / Zarejestruj</a>
+        <div class="dropdown">
+            <p class="dropdown-trigger">Moje Konto</p>
+            <div class="dropdown-content">
+                <a href="{{ url_for('moje_dane') }}">Moje dane</a>
+                <a href="{{ url_for('library') }}">Moje utwory</a>
+            </div>
+        </div>
+        {% if current_user.is_authenticated %}
+            <p>Status: Zalogowany jako {{ current_user.username }}</p>
+            <a href="{{ url_for('logout') }}" class="login-register-btn">Wyloguj</a>
+        {% else %}
+            <p>Status: Niezalogowany</p>
+            <a href="{{ url_for('login') }}" class="login-register-btn">Zaloguj / Zarejestruj</a>
+        {% endif %}
     </div>
-  </div>
+</div>
+
 
   <h1>Kontakt</h1>
 
@@ -57,21 +71,7 @@
       </div>
     </div>
 
- <!-- Formularz kontaktowy -->
- <div class="contact-form">
-  <form action="/send_email" method="POST">
-    <label for="name">Imię i nazwisko</label>
-    <input type="text" id="name" name="name" required>
 
-    <label for="email">Email</label>
-    <input type="email" id="email" name="email" required>
-
-    <label for="message">Wiadomość</label>
-    <textarea id="message" name="message" rows="5" required></textarea>
-
-    <button type="submit">Wyślij wiadomość</button>
-  </form>
-</div>
 
 {% with messages = get_flashed_messages(with_categories=true) %}
   {% if messages %}
@@ -112,19 +112,18 @@
       text-transform: uppercase;
     }
 
-    /* Pasek nawigacyjny na górze */
-    .navigation-bar {
-      width: 100%;
-      max-width: 1600px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 15px 20px;
-      background-color: #fff;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-      margin-bottom: 20px;
-      box-sizing: border-box;
-    }
+        /* Pasek nawigacyjny na górze */
+        .navigation-bar {
+            width: 100vw; /* Cała szerokość ekranu */
+            display: flex;
+            justify-content: space-between; /* Rozłożenie napisów po obu stronach */
+            align-items: center;
+            padding: 15px 20px;
+            background-color: #fff; /* Tło paska */
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+            box-sizing: border-box;
+        }
 
     .left-nav a {
       color: #2f2f2f;
@@ -232,46 +231,7 @@
       color: #4E342E;
     }
 
-    /* Formularz kontaktowy */
-    .contact-form form {
-      display: flex;
-      flex-direction: column;
-      gap: 15px;
-      width: 100%;
-      max-width: 500px;
-      margin: 0 auto;
-    }
-
-    .contact-form label {
-      font-size: 16px;
-      color: #3E2723;
-      text-align: left;
-    }
-
-    .contact-form input, .contact-form textarea {
-      padding: 10px;
-      border: 1px solid #A1887F;
-      border-radius: 5px;
-      font-size: 16px;
-      color: #4E342E;
-    }
-
-    .contact-form button {
-      padding: 10px;
-      background-color: #5D4037;
-      color: #ffffff;
-      border: none;
-      border-radius: 5px;
-      font-size: 18px;
-      text-transform: uppercase;
-      cursor: pointer;
-      transition: background-color 0.3s ease;
-    }
-
-    .contact-form button:hover {
-      background-color: #3E2723;
-    }
-
+    
     /* Sekcja mapy */
     .location-map iframe {
       border-radius: 10px;
@@ -303,6 +263,52 @@
 .login-register-btn:active {
   background-color: #2C1A18; /* Kolor po kliknięciu */
   transform: scale(0.95); /* Zmniejszenie przy kliknięciu */
+}
+
+/* Styl dla rozwijanego menu */
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-trigger {
+    margin: 0;
+    padding: 10px 15px;
+    cursor: pointer;
+    color: #5D4037; /* Normalny kolor */
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.dropdown-trigger:hover {
+    color: #ffffff; /* Zmiana koloru tekstu przy najechaniu */
+    background-color: #3E2723; /* Ciemniejsze tło */
+    border-radius: 5px;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #fff;
+    min-width: 160px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+}
+
+.dropdown-content a {
+    color: #333;
+    padding: 10px 15px;
+    text-decoration: none;
+    display: block;
+    font-size: 14px;
+    transition: background-color 0.3s ease;
+}
+
+.dropdown-content a:hover {
+    background-color: #f4f4f4;
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
 }
   </style>
 </body>

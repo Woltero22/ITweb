@@ -13,14 +13,28 @@
   <!-- Pasek nawigacyjny na samej górze -->
   <div class="navigation-bar">
     <div class="left-nav">
-      <a href="{{ url_for('str_start') }}">← Powrót do strony głównej</a>
+        {% if request.path != url_for('str_start') %}
+            <a href="{{ url_for('str_start') }}">← Powrót do strony głównej</a>
+        {% endif %}
     </div>
     <div class="right-nav">
-      <p>Moje Konto</p>
-      <p>Status: Zalogowany/Zaloguj się</p>
-      <a href="{{ url_for('login') }}" class="login-register-btn">Zaloguj / Zarejestruj</a>
+        <div class="dropdown">
+            <p class="dropdown-trigger">Moje Konto</p>
+            <div class="dropdown-content">
+                <a href="{{ url_for('moje_dane') }}">Moje dane</a>
+                <a href="{{ url_for('library') }}">Moje utwory</a>
+            </div>
+        </div>
+        {% if current_user.is_authenticated %}
+            <p>Status: Zalogowany jako {{ current_user.username }}</p>
+            <a href="{{ url_for('logout') }}" class="login-register-btn">Wyloguj</a>
+        {% else %}
+            <p>Status: Niezalogowany</p>
+            <a href="{{ url_for('login') }}" class="login-register-btn">Zaloguj / Zarejestruj</a>
+        {% endif %}
     </div>
-  </div>
+</div>
+
 
   <h1>Galeria Zdjęć</h1>
 
@@ -67,20 +81,18 @@
       text-transform: uppercase;
     }
 
-    /* Pasek nawigacyjny na górze */
-    .navigation-bar {
-      width: 100%;
-      max-width: 1600px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 15px 20px;
-      background-color: #fff;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-      margin-bottom: 20px;
-      box-sizing: border-box;
-    }
-
+        /* Pasek nawigacyjny na górze */
+        .navigation-bar {
+            width: 100vw; /* Cała szerokość ekranu */
+            display: flex;
+            justify-content: space-between; /* Rozłożenie napisów po obu stronach */
+            align-items: center;
+            padding: 15px 20px;
+            background-color: #fff; /* Tło paska */
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+            box-sizing: border-box;
+        }
     .left-nav a {
       color: #2f2f2f;
       font-size: 1rem;
@@ -225,6 +237,52 @@
       background-color: #2C1A18; /* Kolor po kliknięciu */
       transform: scale(0.95); /* Zmniejszenie przy kliknięciu */
     }
+
+    /* Styl dla rozwijanego menu */
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-trigger {
+    margin: 0;
+    padding: 10px 15px;
+    cursor: pointer;
+    color: #5D4037; /* Normalny kolor */
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.dropdown-trigger:hover {
+    color: #ffffff; /* Zmiana koloru tekstu przy najechaniu */
+    background-color: #3E2723; /* Ciemniejsze tło */
+    border-radius: 5px;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #fff;
+    min-width: 160px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+}
+
+.dropdown-content a {
+    color: #333;
+    padding: 10px 15px;
+    text-decoration: none;
+    display: block;
+    font-size: 14px;
+    transition: background-color 0.3s ease;
+}
+
+.dropdown-content a:hover {
+    background-color: #f4f4f4;
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
   </style>
 </body>
 </html>

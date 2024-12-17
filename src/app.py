@@ -65,7 +65,7 @@ def init_db():
     
 @app.route('/')
 def home():
-    return render_template('index.html')
+    return render_template('str_start.html')
 
 @app.route('/register', methods=['GET', 'POST'])
 def register():
@@ -113,12 +113,45 @@ def login():
 
     return render_template('login.html')
 
+#wylogowywanie sie
 @app.route('/logout')
 @login_required
 def logout():
-    logout_user()
-    flash('You have been logged out.')
-    return redirect(url_for('login'))
+    logout_user()  # Kończymy sesję użytkownika
+    flash('You have been logged out.')  # Komunikat o wylogowaniu
+    return redirect(url_for('logout_page'))  # Przekierowanie na stronę logout.html
+
+@app.route('/logout_page')
+def logout_page():
+    return render_template('logout.html')
+
+#koniec wylogowywania sie
+
+
+#dodalam ja Zuzia:
+
+@app.route('/moje_dane')
+@login_required
+def moje_dane():
+    # Przykładowe dane użytkownika
+    user_data = {
+        "name": "Jan Kowalski",
+        "email": "jan.kowalski@example.com"
+    }
+    return render_template('moje_dane.html', user_data=user_data)
+
+
+@app.route('/library')
+@login_required
+def library():
+    # Pobierz listę plików przypisanych do aktualnie zalogowanego użytkownika
+    conn = sqlite3.connect('database.db')
+    c = conn.cursor()
+    c.execute('SELECT filename FROM files WHERE user_id = ?', (current_user.id,))
+    files = [row[0] for row in c.fetchall()]
+    conn.close()
+    return render_template('library.html', files=files)
+#koniec dodałam ja zuzia
 
 @app.route('/str_start')
 def str_start():

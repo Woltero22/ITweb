@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Moje utwory</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        /* Główne ustawienia */
+        body {
+            font-family: 'Cinzel', serif;
+            background-color: #f7f1e3;
+            margin: 0;
+            padding: 0;
+            color: #4E342E;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* Pasek nawigacyjny na górze */
+        .navigation-bar {
+            width: 100vw; /* Cała szerokość ekranu */
+            display: flex;
+            justify-content: space-between; /* Rozłożenie napisów po obu stronach */
+            align-items: center;
+            padding: 15px 20px;
+            background-color: #fff; /* Tło paska */
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+            box-sizing: border-box;
+        }
+
+        .left-nav a {
+            color: #2f2f2f;
+            font-size: 0.8rem; /* Zmniejszono rozmiar tekstu */
+            font-weight: bold;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .left-nav a:hover {
+            color: #444;
+        }
+
+        .right-nav {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            margin-right: 8px; /* Mniejszy margines */
+        }
+
+        .right-nav p {
+            margin: 0;
+            font-size: 0.8rem; /* Jeszcze mniejszy tekst */
+            color: #2f2f2f;
+        }
+
+        /* Rozwijane menu "Moje Konto" */
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        .dropdown-trigger {
+            padding: 4px 8px; /* Jeszcze mniejszy padding */
+            font-size: 0.8rem; /* Jeszcze mniejszy tekst */
+            color: #5D4037;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        .dropdown-trigger:hover {
+            color: #ffffff;
+            background-color: #3E2723;
+            border-radius: 4px;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #fff;
+            min-width: 130px; /* Jeszcze mniejsza szerokość */
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+            z-index: 1;
+        }
+
+        .dropdown-content a {
+            color: #333;
+            padding: 6px 10px; /* Jeszcze mniejszy padding */
+            text-decoration: none;
+            display: block;
+            font-size: 0.75rem; /* Jeszcze mniejszy tekst */
+            transition: background-color 0.3s ease;
+        }
+
+        .dropdown-content a:hover {
+            background-color: #f4f4f4;
+        }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+
+        /* Pasek nawigacyjny główny */
+        #menu {
+            width: 70%;
+            margin: 0 auto;
+            border-top: 1px solid #5D4037;
+            border-bottom: 1px solid #5D4037;
+            text-align: center;
+            padding: 8px; /* Jeszcze mniejszy padding */
+            background-color: #F5F5F5;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        li {
+            display: inline;
+            margin-right: 8px; /* Mniejszy odstęp */
+        }
+
+        a {
+            color: #3E2723;
+            text-transform: uppercase;
+            text-decoration: none;
+            font-size: 0.8rem; /* Jeszcze mniejszy tekst */
+            padding: 3px 6px; /* Jeszcze mniejszy padding */
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        a:hover {
+            color: #ffffff;
+            background-color: #5D4037;
+            border-radius: 4px;
+        }
+
+        /* Nagłówek strony */
+        h2 {
+            text-align: center;
+            color: #4E342E;
+            font-size: 1.4rem; /* Jeszcze mniejszy rozmiar nagłówka */
+            margin: 10px 0; /* Mniejszy margines */
+        }
+
+        /* Lista utworów */
+        .music-list {
+            list-style-type: none;
+            padding: 0;
+            width: 90%;
+            max-width: 800px;
+        }
+
+        .music-item {
+            background-color: #fff;
+            padding: 10px; /* Jeszcze mniejszy padding */
+            margin-bottom: 6px; /* Mniejszy odstęp */
+            border-radius: 6px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        audio {
+            margin-top: 8px;
+            width: 100%;
+        }
+
+        /* Przycisk Zaloguj / Zarejestruj */
+        .login-register-btn {
+            padding: 4px 12px; /* Jeszcze mniejszy padding */
+            font-size: 0.8rem; /* Jeszcze mniejszy tekst */
+            background-color: #5D4037;
+            color: #fff;
+            text-transform: uppercase;
+            font-weight: bold;
+            border: none;
+            border-radius: 4px;
+            text-decoration: none;
+            text-align: center;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+
+        .login-register-btn:hover {
+            background-color: #3E2723;
+            transform: scale(1.05);
+        }
+
+        .login-register-btn:active {
+            background-color: #2C1A18;
+            transform: scale(0.95);
+        }
+    </style>
+</head>
+<body>
+
+<!-- Pasek nawigacyjny -->
+<div class="navigation-bar">
+    <div class="left-nav">
+        <a href="{{ url_for('str_start') }}" class="back-home">← Powrót do strony głównej</a>
+    </div>
+    <div class="right-nav">
+        <div class="dropdown">
+            <p class="dropdown-trigger">Moje Konto</p>
+            <div class="dropdown-content">
+                <a href="{{ url_for('moje_dane') }}">Moje dane</a>
+                <a href="{{ url_for('library') }}">Moje utwory</a>
+            </div>
+        </div>
+        {% if current_user.is_authenticated %}
+            <p>Status: Zalogowany jako {{ current_user.username }}</p>
+            <a href="{{ url_for('logout') }}" class="login-register-btn">Wyloguj</a>
+        {% else %}
+            <p>Status: Niezalogowany</p>
+            <a href="{{ url_for('login') }}" class="login-register-btn">Zaloguj / Zarejestruj</a>
+        {% endif %}
+    </div>
+</div>
+
+<!-- Pasek nawigacyjny główny -->
+<div id="menu">
+    <ul id="navigation">
+        <li><a href="{{ url_for('equalizer') }}">Equalizer</a></li>
+        <li><a href="{{ url_for('analiza') }}">Blog</a></li>
+        <li><a href="{{ url_for('galeria') }}">Galeria</a></li>
+        <li><a href="{{ url_for('onas') }}">O nas</a></li>
+        <li><a href="{{ url_for('kontakt') }}">Kontakt</a></li>
+    </ul>
+</div>
+
+<!-- Lista utworów -->
+<h2>Moje utwory</h2>
+<ul class="music-list">
+    {% for file in files %}
+    <li class="music-item">
+        <span>{{ file }}</span>
+        <audio controls>
+            <source src="{{ url_for('uploaded_file', filename=file) }}" type="audio/mpeg">
+            Your browser does not support the audio element.
+        </audio>
+    </li>
+    {% endfor %}
+</ul>
+
+</body>
+</html>
